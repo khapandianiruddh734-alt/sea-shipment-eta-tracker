@@ -1,0 +1,25 @@
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.bak
+
+shipments.xlsx
+
+# Local backups and duplicate versions
+dashboard_backup*.py
+dashboard_multimbl....py
+dashboard_multimbl.py.py
+tracking_worker.backup.py
+
