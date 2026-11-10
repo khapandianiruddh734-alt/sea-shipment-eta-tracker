@@ -43,7 +43,7 @@ st.caption("Shared shipment monitoring, ETA updates and change history.")
 
 # Refresh dashboard every 10 seconds.
 st_autorefresh(
-    interval=60 * 1000,
+    interval=10 * 1000,
     key="dashboard_auto_refresh"
 )
 
