@@ -133,8 +133,6 @@ def clear_login_state():
         "sb_client"
     ):
         st.session_state.pop(key, None)
-        st.session_state.pop(key, None)
-
 
 # ============================================================
 # LOGIN SCREEN
