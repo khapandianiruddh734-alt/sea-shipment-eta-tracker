@@ -111,7 +111,7 @@ def login_screen(sb):
             st.rerun()
         except Exception as exc:
             st.error(f"Login failed: {exc}")
-    st.info("Accounts must be registered in Supabase Authentication by the administrator.")
+    st.info("Accounts must be registered.")
 
 
 def authenticated_client():
