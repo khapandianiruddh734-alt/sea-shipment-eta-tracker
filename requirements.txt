@@ -6,3 +6,4 @@ streamlit>=1.40,<2
 supabase>=2,<3
 playwright>=1.50,<2
 extra-streamlit-components
+streamlit-autorefresh
