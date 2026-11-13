@@ -173,7 +173,7 @@ def get_role(sb, user_id):
 def load_cloud_data(sb):
     shipments = (sb.table("current_shipments").select("*").eq("is_active", True)
                  .order("latest_eta").execute().data or [])
-    history = (sb.table("eta_history").select("*").order("changed_at", desc=True)
+    history = (sb.table("eta_history_formatted").select("*").order("changed_at", desc=True)
                .limit(500).execute().data or [])
     return pd.DataFrame(shipments), pd.DataFrame(history)
 
@@ -234,7 +234,7 @@ def save_eta(sb, reference_number, eta_date):
               .eq("reference_number", reference_number).limit(1).execute())
     old_eta = result.data[0].get("latest_eta") or "" if result.data else ""
     if old_eta != new_eta:
-        sb.table("eta_history").insert({"reference_number": reference_number, "old_eta": old_eta,
+        sb.table("eta_history_formatted").insert({"reference_number": reference_number, "old_eta": old_eta,
             "new_eta": new_eta, "changed_at": now, "source": "Manual ETA Update"}).execute()
     row = {"reference_number": reference_number, "reference_type": "MBL", "latest_eta": new_eta,
            "eta_is_actual": 0, "previous_eta": old_eta if old_eta != new_eta else None,
@@ -275,7 +275,7 @@ def migrate_local_database(sb):
             row.setdefault("is_active", True)
         sb.table("current_shipments").upsert(shipment_rows, on_conflict="reference_number").execute()
     if history_rows:
-        sb.table("eta_history").insert(history_rows).execute()
+        sb.table("eta_history_formatted").insert(history_rows).execute()
     return len(shipment_rows), len(history_rows)
 
 # ============================================================
